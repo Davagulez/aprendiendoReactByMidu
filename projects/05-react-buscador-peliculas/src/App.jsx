@@ -3,13 +3,23 @@ import './App.css'
 //* useRef sirve para tener un objeto de referencia pero que a diferencia de useState, persiste entre los distintos renderizados */
 import { useMovies } from './hooks/useMovies'
 import { Movies } from './components/Movies'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import  debounce  from 'just-debounce-it'
 
 function App() {
   /* const inputRef = useRef() */
   const [sort, setSort] = useState(false)
   const {search, updateSearch, error} = useSearch()
   const { movies, getMovies, loading } = useMovies({ search, sort })
+
+  //debounce: el debounce sirve para que no ejecuten tantas llamadas. Hay varias formas de hacerlo. la favorita de midu es just-debounce-it
+  const debounceGetMovies = useCallback(
+    debounce(search => {
+      console.log('search', search)
+      getMovies({search})
+    }, 300)
+    ,[]
+  )
   
   const handleSort = () => {
     setSort(!sort)
@@ -26,7 +36,7 @@ function App() {
   const handleChange = (event) => {
     const newSearch = event.target.value
     updateSearch(newSearch)
-    getMovies({search: newSearch})
+    debounceGetMovies(newSearch)
   }
   
   function useSearch() {
