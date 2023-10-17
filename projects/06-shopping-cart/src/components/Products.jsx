@@ -2,6 +2,7 @@ import './Products.css'
 import { AddToCartIcon } from './Icons.jsx'
 
 export function Products({products}) {
+
     return (
         <main className='products'>
             <ul>
@@ -11,9 +12,9 @@ export function Products({products}) {
                         <div>
                             <strong>{product.title}</strong> - ${product.price}
                         </div>
-                        <div>
+                        <button>
                             < AddToCartIcon />
-                        </div>
+                        </button>
                     </li>
                 ))}
             </ul>
