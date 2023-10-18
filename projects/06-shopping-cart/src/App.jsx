@@ -6,6 +6,7 @@ import { useState } from "react";
 import { is_DEVELOPMENT } from "./config";
 import { useFilters } from "./hooks/useFilters.js";
 import { Cart } from "./components/Cart";
+import { CartProvider } from "./context/cart";
 
 
 function App() {
@@ -14,12 +15,12 @@ function App() {
   const filteredProducts = filterProducts(products)
 
   return (
-    <>
+    <CartProvider>
       < Header />
       < Cart />
       < Products products={filteredProducts} />
       {is_DEVELOPMENT && < Footer />}
-    </>
+    </CartProvider>
   )
 }
 
