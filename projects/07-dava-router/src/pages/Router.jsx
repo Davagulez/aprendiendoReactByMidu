@@ -28,11 +28,9 @@ export function Router({ children ,routes = [], defaultComponent: DefaultCompone
     const isRoute = name === 'Route'
 
     return isRoute ? props : null
-  }).filter(Boolean)
+  })
 
-  console.log(routesFromChildrens)
-
-  const rootsToUse = routes.concat(routesFromChildrens)
+  const rootsToUse = routes.concat(routesFromChildrens).filter(Boolean)
 
   //hemos usado path-to-regex
   //para poder detectar rutas dinamicas, como por ejemplo
