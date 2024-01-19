@@ -1,4 +1,4 @@
-import { FilterValue } from "../types"
+import { FilterValue } from "../assets/types"
 import { Filters } from "./Filters"
 
 interface Props {

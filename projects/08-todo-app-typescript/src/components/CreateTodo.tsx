@@ -1,4 +1,4 @@
-import { todoTitle } from "../types"
+import { todoTitle } from "../assets/types"
 import { useState } from 'react'
 
 interface Props {

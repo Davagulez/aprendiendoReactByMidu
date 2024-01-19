@@ -1,5 +1,5 @@
 import { Todo } from './Todo'
-import type { Todo as TodoType } from '../types'
+import type { Todo as TodoType } from '../assets/types'
 import { useState } from 'react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 

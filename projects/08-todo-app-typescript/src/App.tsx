@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { Todos } from "./assets/components/Todos"
+import { Todos } from "./components/Todos"
 import { FilterValue, todoTitle } from "./assets/types"
 import { TODO_FILTERS } from "./consts"
-import { Footer } from "./assets/components/Footer"
-import { Header } from "./assets/components/Header"
+import { Footer } from "./components/Footer"
+import { Header } from "./components/Header"
 
 const mockTodos = [
   {
