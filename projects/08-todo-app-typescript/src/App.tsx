@@ -1,22 +1,23 @@
 import { useState } from "react"
 import { Todos } from "./assets/components/Todos"
-import { FilterValue, todoTitle, type todoId, type Todo as TodoType } from "./assets/types"
+import { FilterValue, todoTitle } from "./assets/types"
 import { TODO_FILTERS } from "./consts"
 import { Footer } from "./assets/components/Footer"
 import { Header } from "./assets/components/Header"
+
 const mockTodos = [
   {
-    id: 1,
+    id: '1',
     title:'Aprender React con typescript',
     completed: false,
   },
   {
-    id: 2,
+    id: '2',
     title:'Mandar correo a taverniti',
     completed: true,
   },
   {
-    id: 3,
+    id: '3',
     title:'buscar un neurologo',
     completed: false,
   }
@@ -26,12 +27,12 @@ const App = (): JSX.Element =>  {
   const [todos, setTodos] = useState(mockTodos)
   const [filterSelected, setFilterSelected]= useState<FilterValue>(TODO_FILTERS.ALL)
 
-  const handleRemove = ({ id }: todoId): void => {
+  const handleRemove = (id: string): void => {
     const newTodos = todos.filter(todo => todo.id !== id)
     setTodos(newTodos)
   }
 
-  const handleComplete = ({ id, completed }: Pick<TodoType, 'id' | 'completed' >): void => {
+  const handleComplete = ( id: string, completed: boolean ): void => {
       const newTodos = todos.map(todo => {
         if (todo.id === id) {
           return {
@@ -61,7 +62,21 @@ const App = (): JSX.Element =>  {
       completed: false
     }
     
-    const newTodos = [... todos, newTodo]
+    setTodos([...todos, newTodo])
+  }
+
+  const handleUpdateTitle = ({ id, title }: { id: string, title: string }): void => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          title
+        }
+      }
+
+      return todo
+    })
+
     setTodos(newTodos)
   }
 
@@ -79,8 +94,9 @@ const App = (): JSX.Element =>  {
       <Header onAddTodo={handleAddTodo} />
 
       <Todos
-      onToggleCompleted={handleComplete}
-      onRemoveTodo = {handleRemove}
+      setCompleted={handleComplete}
+      removeTodo = {handleRemove}
+      setTitle={handleUpdateTitle}
       todos={filteredTodos}/>
 
       <Footer
